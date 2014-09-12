@@ -1,20 +1,24 @@
 <head>
-  <title>versionup</title>
+    <title>versionup</title>
 </head>
 
 <body>
-  {{> loginButtons}}
+    {{> loginButtons}}
 
-  <h1>Subscribe to a GitHub repository.</h1>
-  <h1>Get email notifications when they release a new version.</h1>
-  <h2>Automatically subscribe to all starred repositories (optional).</h2>
+    <h1>Subscribe to a GitHub repository.</h1>
+    <h1>Get email notifications when they release a new version.</h1>
+    <h2>Optionally ignore beta releases.</h2>
+    <h2>Connect your GitHub account to automatically subscribe to all starred repositories (optional).</h3>
+    <h3>View release history, frequency, contributor growth, issue velocity.</h3>
+    <h3>If you're the project owner, connect your GitHub account to get regular updates on the above stats.</h3>
+    <h4>Or don't connect your GitHub account, but you can still place a <a href="#">badge at the top of your Readme</a> to remind people to subscribe.</h4>
 
-  Subscribe to a repository:
-  <input type="text" placeholder="username">/<input type="text" placeholder="reponame">
-  {{> hello}}
+    Find a project:
+    <input type="text" placeholder="username">/<input type="text" placeholder="reponame">
+    {{> hello}}
 </body>
 
 <template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+    <button>Click Me</button>
+    <p>You've pressed the button {{counter}} times.</p>
 </template>
