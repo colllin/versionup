@@ -3,8 +3,14 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  {{> loginButtons}}
 
+  <h1>Subscribe to a GitHub repository.</h1>
+  <h1>Get email notifications when they release a new version.</h1>
+  <h2>Automatically subscribe to all starred repositories (optional).</h2>
+
+  Subscribe to a repository:
+  <input type="text" placeholder="username">/<input type="text" placeholder="reponame">
   {{> hello}}
 </body>
 
