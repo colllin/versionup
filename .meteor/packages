@@ -4,9 +4,12 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 accounts-github
 accounts-base
 accounts-ui
+http
+meteorhacks:npm
 
+
+npm-container

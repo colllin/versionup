@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "parse-link-header": {
+      "version": "0.2.0",
+      "dependencies": {
+        "xtend": {
+          "version": "4.0.0"
+        }
+      }
+    }
+  }
+}

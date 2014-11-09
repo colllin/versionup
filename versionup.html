@@ -3,29 +3,58 @@
 </head>
 
 <body>
-    {{#if false}}
-        {{> loginButtons}}
+    {{#if loggedOut}}
+        {{> join}}
     {{/if}}
-
-    <h1>Subscribe to a GitHub repository.</h1>
-    <h1>Get email notifications when they release a new version.</h1>
-    <h2>Optionally ignore beta releases.</h2>
-    <h2>Connect your GitHub account to automatically subscribe to all starred repositories (optional).</h2>
-    <h3>View release history, frequency, contributor growth, issue velocity.</h3>
-    <h3>If you're the project owner, connect your GitHub account to get regular updates on the above stats.</h3>
-    <h4>Or don't connect your GitHub account, but you can still place a <a href="#">badge at the top of your Readme</a> to remind people to subscribe.</h4>
-
-    {{> projectFinder}}
+    {{#if loggedIn}}
+        {{> manage}}
+    {{/if}}
+    {{#if loggingIn}}
+        {{> wait}}
+    {{/if}}
 </body>
+
+<template name="join">
+    <h1>Put those stars to work.</h1>
+
+    <h2>Connect with Github.</h2>
+        {{> loginButtons}}
+    <h2>Get an email when your starred repos release or tag a new version.</h2>
+    <h2>Customize your notification settings per-repo.</h2>
+
+    <h2>For the data-driven:</h2>
+    <ul>
+        <li>View release history, frequency, contributor growth, issue velocity.</li>
+        <li>If you're the project owner, connect your GitHub account to get updates on the above stats.</li>
+        <li>Or don't connect your GitHub account, but you can still place a <a href="#">badge at the top of your Readme</a> to remind people to subscribe.</li>
+    </ul>
+</template>
+
+<template name="manage">
+    <h1>Manage alerts.</h1>
+    <ul>
+    {{#each starred}}
+        <li>
+            {{> repo}}
+        </li>
+    {{/each}}
+    </ul>
+</template>
+
+<template name="repo">
+    {{this.full_name}}
+</template>
+
+<template name="wait">
+    Hold still while we log you in...
+</template>
 
 <template name="projectFinder">
     Find a project:
-    <input type="text" placeholder="username" name="username">/<input type="text" placeholder="reponame" name="slug">
+    <input type="text" placeholder="owner" name="owner">/<input type="text" placeholder="repo" name="repo">
     {{#if loading}}
         Loading...
     {{/if}}
-</template>
-
-<template name="hello">
-    <p>You've pressed the button {{counter}} times.</p>
+    {{project}}
+    <a href="javascript://" class="js-refresh-project">refresh</a>
 </template>
