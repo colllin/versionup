@@ -42,7 +42,15 @@
 </template>
 
 <template name="repo">
-    {{this.full_name}}
+    <h1>
+        {{this.full_name}}
+    </h1>
+    <p>
+        Latest Release: {{latestRelease}}
+    </p>
+    <p>
+        Latest Tag: {{latestTag}}
+    </p>
 </template>
 
 <template name="wait">

@@ -29,6 +29,27 @@ Template.manage.helpers({
 
 
 
+Template.repo.helpers({
+    latestRelease: function() {
+        var doc = Releases.findOne({
+            repo_github_id: this.github_id
+        }, {
+            sort: {published_at: -1}
+        });
+        return doc ? doc.name : this.releases_etag ? 'No Releases.' : 'Fetching releases...';
+    },
+    latestTag: function() {
+        var doc = Tags.findOne({
+            repo_github_id: this.github_id
+        }, {
+            sort: {date: -1}
+        });
+        return doc ? doc.name : this.tags_etag ? 'No Tags.' : 'Fetching tags...';
+    }
+})
+
+
+
 Template.projectFinder.created = function() {
     this._queryResults = [];
     this._query = _.debounce(function(projectQuery) {

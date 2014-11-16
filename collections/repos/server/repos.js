@@ -1,17 +1,17 @@
-Future = Npm.require('fibers/future');
+// Future = Npm.require('fibers/future');
 
 Meteor.startup(function () {
     Repos.upsertGithubRepo = function(githubApiRepo) {
+
         githubApiRepo.github_id = githubApiRepo.id;
         delete githubApiRepo.id;
-        Repos.upsert({github_id: githubApiRepo.github_id}, githubApiRepo);
-        //
-        // // Fetch repo from Github API
-        // var response = HTTP.get(GitHubApi.url + '/repos/:owner/:repo'.replace(':owner', githubRepo.owner).replace(':repo', githubRepo.name), {
-        //     headers: GitHubApi.headers,
-        //     params: GitHubApi.params
-        // });
-        // Repos.insert(reponse.data);
+
+        // Trim unnecessary owner data.
+        if (githubApiRepo.owner) githubApiRepo.owner = _(githubApiRepo.owner).pick('login', 'avatar_url');
+
+        Repos.upsert({github_id: githubApiRepo.github_id}, {
+            $set: githubApiRepo
+        });
     }
 });
 
@@ -49,7 +49,15 @@ Meteor.publish("starred-repos", function() {
     // // fut.wait();
     // async().wait();
 
-    return Repos.find({
-        github_id: {$in: user.services.github.starred}
-    });
+    return [
+        Repos.find({
+            github_id: {$in: user.services.github.starred}
+        }),
+        Releases.find({
+            repo_github_id: {$in: user.services.github.starred}
+        }),
+        Tags.find({
+            repo_github_id: {$in: user.services.github.starred}
+        })
+    ];
 });

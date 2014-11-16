@@ -5,3 +5,7 @@ Meteor.publish('userData', function() {
         }
     });
 });
+
+// MyCollection.hookOptions.after.update = {fetchPrevious: false};
+// Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
+// });
